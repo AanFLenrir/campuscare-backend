@@ -5,7 +5,7 @@
 | No | Nama | NIM | GitHub | Peran |
 |---|---|---|---|---|
 | 1 | MOHAMMAD ANHAZ ABDILAH | 434241102 | AanFLenrir | Developer & Git Master |
-| 2 | *(Anggota 2 — isi sesuai data kelompok)* | — | — | — |
+| 2 | OKTA ROMAN SANJAYA | 434241108 | decul558 | Backend Developer (Routing & Authentication) |
 | 3 | *(Anggota 3 — isi sesuai data kelompok)* | — | — | — |
 
 ## Pembagian Tugas
@@ -16,10 +16,13 @@
 | Model & Migration | MOHAMMAD ANHAZ ABDILAH |
 | Repository layer | MOHAMMAD ANHAZ ABDILAH |
 | Service layer (clean architecture) | MOHAMMAD ANHAZ ABDILAH |
-| Route & HTTP callbacks | MOHAMMAD ANHAZ ABDILAH |
-| Middleware JWT & Authorization | MOHAMMAD ANHAZ ABDILAH |
+| Route & HTTP callbacks | OKTA ROMAN SANJAYA |
+| Middleware JWT & Authorization | OKTA ROMAN SANJAYA |
 | Unit Testing | MOHAMMAD ANHAZ ABDILAH |
 | Dokumentasi | MOHAMMAD ANHAZ ABDILAH |
+| Role-Based Authorization | OKTA ROMAN SANJAYA |
+| Authentication Routes | OKTA ROMAN SANJAYA |
+| User Management Routes | OKTA ROMAN SANJAYA |
 | *(Fitur tambahan anggota lain)* | *(Isi sesuai kontribusi nyata)* |
 
 ## Catatan
