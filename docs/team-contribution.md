@@ -5,7 +5,7 @@
 | No | Nama | NIM | GitHub | Peran |
 |---|---|---|---|---|
 | 1 | MOHAMMAD ANHAZ ABDILAH | 434241102 | AanFLenrir | Developer & Git Master |
-| 2 | OKTA ROMAN SANJAYA | 434241108 | decul558 | Backend Developer (Routing & Authentication) |
+| 2 | OKTA ROMAN SANJAYA | 434241108 | decul558-cell | Backend Developer (Routing & Authentication) |
 | 3 | *(Anggota 3 — isi sesuai data kelompok)* | — | — | — |
 
 ## Pembagian Tugas
