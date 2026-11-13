@@ -7,10 +7,6 @@
 | 1 | MOHAMMAD ANHAZ ABDILAH | 434241102 | AanFLenrir | Developer & Git Master |
 | 2 | *(Anggota 2 — isi sesuai data kelompok)* | — | — | — |
 | 3 | *(Anggota 3 — isi sesuai data kelompok)* | — | — | — |
-| 4 | *(Anggota 4 — isi sesuai data kelompok)* | — | — | — |
-
-> Kolom anggota 2–4 harus dilengkapi oleh anggota kelompok sesuai data asli.
-> Jangan mengisi dengan identitas yang tidak sesuai.
 
 ## Pembagian Tugas
 
