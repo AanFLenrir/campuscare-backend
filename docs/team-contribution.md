@@ -31,3 +31,4 @@
 - Setiap anggota melakukan commit menggunakan akun GitHub masing-masing.
 - Commit hanya untuk pekerjaan yang benar-benar dikerjakan oleh akun tersebut.
 - Git Master (MOHAMMAD ANHAZ ABDILAH) bertanggung jawab atas merging ke `main`.
+

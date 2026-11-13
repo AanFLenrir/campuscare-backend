@@ -60,3 +60,4 @@ git push origin main
 ```
 
 Pastikan seluruh pemeriksaan (`go build`, `go vet`, `go test`) berhasil sebelum push.
+
