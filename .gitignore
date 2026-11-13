@@ -16,7 +16,10 @@
 
 # Env files (do NOT commit actual .env)
 .env
-.env.*
+.env.local
+.env.production
+# Allow .env.example to be committed
+!.env.example
 
 # IDE / editor
 .vscode/
