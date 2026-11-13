@@ -1,0 +1,28 @@
+# Binaries
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Build output
+/bin
+/out
+
+# Go files
+*.test
+
+# Dependency directories
+/vendor/
+
+# Env files (do NOT commit actual .env)
+.env
+.env.*
+
+# IDE / editor
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
