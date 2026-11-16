@@ -15,8 +15,13 @@
 | No | Nama | NIM | Peran |
 |---|---|---|---|
 | 1 | MOHAMMAD ANHAZ ABDILAH | 434241102 | Developer & Git Master |
+<<<<<<< Updated upstream
 | 2 | OKTA ROMAN SANJAYA | 434241108 | Backend Developer (Routing & Authentication) |
 | 3 | DANU ADJI FERIANTO | 434241111 | QA & Backend Testing Engineer |
+=======
+| 2 | *(Anggota 2)* | — | *(isi sesuai data kelompok)* |
+| 3 | *(Anggota 3)* | — | *(isi sesuai data kelompok)* |
+>>>>>>> Stashed changes
 
 **Link Repository GitHub:** https://github.com/AanFLenrir/campuscare-backend
 
