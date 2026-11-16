@@ -1,2 +1,2 @@
 -- Down migration for roles table
-DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS roles CASCADE;

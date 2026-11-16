@@ -2,7 +2,7 @@ package helper
 
 import (
 	"fmt"
-	"github.com/AanFLenrir/campuscare-backend/config"
+	"github.com/AanFLenrir/PetrivaBackend/config"
 	"github.com/golang-jwt/jwt/v5"
 	"time"
 )

@@ -3,7 +3,7 @@ package helper_test
 import (
 	"testing"
 
-	"github.com/AanFLenrir/campuscare-backend/helper"
+	"github.com/AanFLenrir/PetrivaBackend/helper"
 )
 
 func TestHashPassword_Success(t *testing.T) {

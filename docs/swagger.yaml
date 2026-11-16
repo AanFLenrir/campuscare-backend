@@ -1,0 +1,2020 @@
+basePath: /api/v1
+definitions:
+  helper.APIResponse:
+    properties:
+      data: {}
+      message:
+        type: string
+      success:
+        type: boolean
+    type: object
+  model.Appointment:
+    properties:
+      appointment_date:
+        type: string
+      cancellation_reason:
+        type: string
+      clinic_id:
+        type: string
+      clinic_name:
+        type: string
+      complaint:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      owner_id:
+        type: string
+      owner_name:
+        type: string
+      pet_id:
+        type: string
+      pet_name:
+        description: Relational details
+        type: string
+      pet_species:
+        type: string
+      service_id:
+        type: string
+      service_name:
+        type: string
+      service_price:
+        type: number
+      status:
+        type: string
+      updated_at:
+        type: string
+      veterinarian_id:
+        type: string
+      veterinarian_name:
+        type: string
+    type: object
+  model.AuthResponse:
+    properties:
+      token:
+        type: string
+      user:
+        $ref: '#/definitions/model.UserResponse'
+    type: object
+  model.CancelAppointmentInput:
+    properties:
+      reason:
+        type: string
+    type: object
+  model.Clinic:
+    properties:
+      address:
+        type: string
+      created_at:
+        type: string
+      description:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      name:
+        type: string
+      phone:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  model.CreateAppointmentInput:
+    properties:
+      appointment_date:
+        description: RFC3339 format (e.g. 2026-11-20T10:00:00Z)
+        type: string
+      clinic_id:
+        type: string
+      complaint:
+        type: string
+      pet_id:
+        type: string
+      service_id:
+        type: string
+      veterinarian_id:
+        type: string
+    type: object
+  model.CreateClinicInput:
+    properties:
+      address:
+        type: string
+      description:
+        type: string
+      email:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+    type: object
+  model.CreateMedicalRecordInput:
+    properties:
+      appointment_id:
+        type: string
+      diagnosis:
+        type: string
+      examination_date:
+        description: RFC3339, default now()
+        type: string
+      notes:
+        type: string
+      prescription:
+        type: string
+      symptoms:
+        type: string
+      treatment:
+        type: string
+    type: object
+  model.CreatePetInput:
+    properties:
+      birth_date:
+        type: string
+      breed:
+        type: string
+      color:
+        type: string
+      gender:
+        type: string
+      name:
+        type: string
+      notes:
+        type: string
+      species:
+        type: string
+      weight:
+        type: number
+    type: object
+  model.CreateServiceInput:
+    properties:
+      clinic_id:
+        type: string
+      description:
+        type: string
+      duration_minutes:
+        type: integer
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  model.CreateUserInput:
+    properties:
+      address:
+        type: string
+      clinic_id:
+        type: string
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      role:
+        type: string
+    type: object
+  model.CreateVaccinationInput:
+    properties:
+      batch_number:
+        type: string
+      next_vaccine_date:
+        type: string
+      notes:
+        type: string
+      pet_id:
+        type: string
+      vaccine_date:
+        description: YYYY-MM-DD
+        type: string
+      vaccine_name:
+        type: string
+    type: object
+  model.DashboardSummary:
+    properties:
+      data: {}
+      generated_at:
+        type: string
+      role:
+        type: string
+    type: object
+  model.LoginInput:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  model.MedicalRecord:
+    properties:
+      appointment_id:
+        type: string
+      clinic_name:
+        type: string
+      created_at:
+        type: string
+      diagnosis:
+        type: string
+      examination_date:
+        type: string
+      id:
+        type: string
+      notes:
+        type: string
+      owner_name:
+        type: string
+      pet_id:
+        type: string
+      pet_name:
+        description: Relational details
+        type: string
+      pet_species:
+        type: string
+      prescription:
+        type: string
+      symptoms:
+        type: string
+      treatment:
+        type: string
+      updated_at:
+        type: string
+      veterinarian_id:
+        type: string
+      veterinarian_name:
+        type: string
+    type: object
+  model.Pet:
+    properties:
+      birth_date:
+        description: YYYY-MM-DD
+        type: string
+      breed:
+        type: string
+      color:
+        type: string
+      created_at:
+        type: string
+      gender:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      name:
+        type: string
+      notes:
+        type: string
+      owner_email:
+        type: string
+      owner_id:
+        type: string
+      owner_name:
+        description: Relational
+        type: string
+      owner_phone:
+        type: string
+      species:
+        type: string
+      updated_at:
+        type: string
+      weight:
+        type: number
+    type: object
+  model.RegisterInput:
+    properties:
+      address:
+        type: string
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+    type: object
+  model.Service:
+    properties:
+      clinic_id:
+        type: string
+      clinic_name:
+        type: string
+      created_at:
+        type: string
+      description:
+        type: string
+      duration_minutes:
+        type: integer
+      id:
+        type: string
+      is_active:
+        type: boolean
+      name:
+        type: string
+      price:
+        type: number
+      updated_at:
+        type: string
+    type: object
+  model.UpdateAppointmentStatusInput:
+    properties:
+      reason:
+        type: string
+      status:
+        type: string
+    type: object
+  model.UpdateClinicInput:
+    properties:
+      address:
+        type: string
+      description:
+        type: string
+      email:
+        type: string
+      is_active:
+        type: boolean
+      name:
+        type: string
+      phone:
+        type: string
+    type: object
+  model.UpdateMedicalRecordInput:
+    properties:
+      diagnosis:
+        type: string
+      notes:
+        type: string
+      prescription:
+        type: string
+      symptoms:
+        type: string
+      treatment:
+        type: string
+    type: object
+  model.UpdatePetInput:
+    properties:
+      birth_date:
+        type: string
+      breed:
+        type: string
+      color:
+        type: string
+      gender:
+        type: string
+      name:
+        type: string
+      notes:
+        type: string
+      species:
+        type: string
+      weight:
+        type: number
+    type: object
+  model.UpdateServiceInput:
+    properties:
+      description:
+        type: string
+      duration_minutes:
+        type: integer
+      is_active:
+        type: boolean
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  model.UpdateUserInput:
+    properties:
+      address:
+        type: string
+      clinic_id:
+        type: string
+      is_active:
+        type: boolean
+      name:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+    type: object
+  model.UpdateVaccinationInput:
+    properties:
+      batch_number:
+        type: string
+      next_vaccine_date:
+        type: string
+      notes:
+        type: string
+      vaccine_date:
+        type: string
+      vaccine_name:
+        type: string
+    type: object
+  model.UserResponse:
+    properties:
+      address:
+        type: string
+      clinic_id:
+        type: string
+      clinic_name:
+        type: string
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      name:
+        type: string
+      phone:
+        type: string
+      role:
+        type: string
+    type: object
+  model.Vaccination:
+    properties:
+      batch_number:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      next_vaccine_date:
+        type: string
+      notes:
+        type: string
+      owner_name:
+        type: string
+      pet_id:
+        type: string
+      pet_name:
+        description: Relational details
+        type: string
+      pet_species:
+        type: string
+      updated_at:
+        type: string
+      vaccine_date:
+        description: YYYY-MM-DD
+        type: string
+      vaccine_name:
+        type: string
+      veterinarian_id:
+        type: string
+      veterinarian_name:
+        type: string
+    type: object
+host: localhost:3000
+info:
+  contact:
+    email: team@petriva.com
+    name: PETRIVA Engineering Team
+  description: Pet Care Management System REST API built with Go, Fiber v2, PostgreSQL,
+    and Clean Architecture.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://petriva.com/terms/
+  title: PETRIVA API
+  version: 1.0.0
+paths:
+  /appointments:
+    get:
+      description: Mendapatkan daftar janji temu sesuai role pengguna dengan opsi
+        filter status
+      parameters:
+      - description: Filter Status (PENDING, CONFIRMED, IN_PROGRESS, COMPLETED, CANCELLED,
+          REJECTED)
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Appointment'
+                  type: array
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: List Appointments
+      tags:
+      - Appointments
+    post:
+      consumes:
+      - application/json
+      description: Membuat jadwal janji temu pemeriksaan hewan ke klinik dan dokter
+      parameters:
+      - description: Data Janji Temu Baru
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreateAppointmentInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Appointment'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Book Appointment (Pet Owner Only)
+      tags:
+      - Appointments
+  /appointments/{id}:
+    get:
+      description: Mendapatkan detail janji temu berdasarkan ID
+      parameters:
+      - description: Appointment ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Appointment'
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get Appointment Detail
+      tags:
+      - Appointments
+  /appointments/{id}/cancel:
+    put:
+      consumes:
+      - application/json
+      description: Membatalkan janji temu dengan menyertakan alasan pembatalan
+      parameters:
+      - description: Appointment ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Alasan Pembatalan
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.CancelAppointmentInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Appointment'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Cancel Appointment
+      tags:
+      - Appointments
+  /appointments/{id}/status:
+    put:
+      consumes:
+      - application/json
+      description: Mengubah status janji temu (CONFIRMED, IN_PROGRESS, COMPLETED,
+        REJECTED)
+      parameters:
+      - description: Appointment ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Status Baru
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.UpdateAppointmentStatusInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Appointment'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Update Appointment Status (Veterinarian & Admin)
+      tags:
+      - Appointments
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Otentikasi pengguna menggunakan email dan password untuk mendapatkan
+        JWT token
+      parameters:
+      - description: Kredensial Login
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.LoginInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.AuthResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      summary: User Login
+      tags:
+      - Authentication
+  /auth/me:
+    get:
+      description: Mendapatkan data profil pengguna yang sedang terotentikasi
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.UserResponse'
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get Current Profile
+      tags:
+      - Authentication
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Mendaftarkan akun publik baru dengan role PET_OWNER
+      parameters:
+      - description: Payload Registrasi
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.RegisterInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.AuthResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      summary: Register Pet Owner
+      tags:
+      - Authentication
+  /clinics:
+    get:
+      description: Mendapatkan daftar seluruh klinik hewan aktif yang terdaftar di
+        PETRIVA
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Clinic'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      summary: List Public Clinics
+      tags:
+      - Clinics
+    post:
+      consumes:
+      - application/json
+      description: Menambahkan data klinik hewan baru ke dalam sistem
+      parameters:
+      - description: Data Klinik Baru
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreateClinicInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Clinic'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Create Clinic (Admin Only)
+      tags:
+      - Clinics
+  /clinics/{id}:
+    delete:
+      description: Menonaktifkan klinik hewan dari sistem
+      parameters:
+      - description: Clinic ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Deactivate Clinic (Admin Only)
+      tags:
+      - Clinics
+    get:
+      description: Mendapatkan detail informasi klinik hewan berdasarkan ID
+      parameters:
+      - description: Clinic ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Clinic'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      summary: Get Clinic Detail
+      tags:
+      - Clinics
+    put:
+      consumes:
+      - application/json
+      description: Memperbarui informasi data klinik hewan yang sudah ada
+      parameters:
+      - description: Clinic ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Data Pembaruan Klinik
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.UpdateClinicInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Clinic'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Update Clinic (Admin Only)
+      tags:
+      - Clinics
+  /dashboard/summary:
+    get:
+      description: Mendapatkan ringkasan statistik dan metrik operasional sesuai role
+        pengguna (Admin, Dokter, atau Pet Owner)
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.DashboardSummary'
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get Dashboard Summary
+      tags:
+      - Dashboard
+  /health:
+    get:
+      description: Endpoint untuk memeriksa status backend dan ketersediaan layanan
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      summary: Health Check
+      tags:
+      - Health
+  /medical-records:
+    get:
+      description: Mendapatkan daftar rekam medis (milik hewan sendiri bagi Pet Owner,
+        atau seluruhnya bagi Dokter & Admin)
+      parameters:
+      - description: Filter berdasarkan Pet ID (UUID)
+        in: query
+        name: pet_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.MedicalRecord'
+                  type: array
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: List Medical Records
+      tags:
+      - Medical Records
+    post:
+      consumes:
+      - application/json
+      description: Mencatat data rekam medis hasil pemeriksaan janji temu hewan
+      parameters:
+      - description: Data Rekam Medis
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreateMedicalRecordInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.MedicalRecord'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Create Medical Record (Veterinarian Only)
+      tags:
+      - Medical Records
+  /medical-records/{id}:
+    get:
+      description: Mendapatkan detail data rekam medis pemeriksaan berdasarkan ID
+      parameters:
+      - description: Medical Record ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.MedicalRecord'
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get Medical Record Detail
+      tags:
+      - Medical Records
+    put:
+      consumes:
+      - application/json
+      description: Memperbarui diagnosa, terapi, resep, atau catatan rekam medis
+      parameters:
+      - description: Medical Record ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Data Pembaruan Rekam Medis
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.UpdateMedicalRecordInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.MedicalRecord'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Update Medical Record (Veterinarian & Admin)
+      tags:
+      - Medical Records
+  /pets:
+    get:
+      description: Mendapatkan daftar hewan peliharaan (milik sendiri bagi Pet Owner,
+        atau seluruh hewan bagi Admin)
+      parameters:
+      - description: Filter berdasarkan Owner ID (Khusus Admin)
+        in: query
+        name: owner_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Pet'
+                  type: array
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: List Pets
+      tags:
+      - Pets
+    post:
+      consumes:
+      - application/json
+      description: Mendaftarkan hewan peliharaan baru untuk akun pemilik yang sedang
+        login
+      parameters:
+      - description: Data Hewan Baru
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreatePetInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Pet'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Register Pet (Pet Owner Only)
+      tags:
+      - Pets
+  /pets/{id}:
+    delete:
+      description: Menonaktifkan data hewan peliharaan milik sendiri
+      parameters:
+      - description: Pet ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Deactivate Pet (Pet Owner Only)
+      tags:
+      - Pets
+    get:
+      description: Mendapatkan informasi lengkap profil hewan peliharaan berdasarkan
+        ID
+      parameters:
+      - description: Pet ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Pet'
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get Pet Detail
+      tags:
+      - Pets
+    put:
+      consumes:
+      - application/json
+      description: Memperbarui data hewan peliharaan milik sendiri
+      parameters:
+      - description: Pet ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Data Pembaruan Hewan
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.UpdatePetInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Pet'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Update Pet (Pet Owner Only)
+      tags:
+      - Pets
+  /services:
+    get:
+      description: Mendapatkan daftar layanan klinik hewan dengan opsi filter berdasarkan
+        klinik
+      parameters:
+      - description: Filter berdasarkan Clinic ID (UUID)
+        in: query
+        name: clinic_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Service'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      summary: List Services
+      tags:
+      - Services
+    post:
+      consumes:
+      - application/json
+      description: Menambahkan layanan klinik baru
+      parameters:
+      - description: Data Layanan Baru
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreateServiceInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Service'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Create Service (Admin Only)
+      tags:
+      - Services
+  /services/{id}:
+    delete:
+      description: Menonaktifkan layanan klinik
+      parameters:
+      - description: Service ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Deactivate Service (Admin Only)
+      tags:
+      - Services
+    get:
+      description: Mendapatkan detail informasi layanan berdasarkan ID
+      parameters:
+      - description: Service ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Service'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      summary: Get Service Detail
+      tags:
+      - Services
+    put:
+      consumes:
+      - application/json
+      description: Memperbarui informasi layanan klinik
+      parameters:
+      - description: Service ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Data Pembaruan Layanan
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.UpdateServiceInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Service'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Update Service (Admin Only)
+      tags:
+      - Services
+  /users:
+    get:
+      description: Mendapatkan daftar seluruh pengguna dengan filter opsional berdasarkan
+        role
+      parameters:
+      - description: Filter berdasarkan Role (ADMIN, VETERINARIAN, PET_OWNER)
+        in: query
+        name: role
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.UserResponse'
+                  type: array
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: List Users (Admin Only)
+      tags:
+      - Users
+    post:
+      consumes:
+      - application/json
+      description: Menambahkan pengguna baru ke dalam sistem
+      parameters:
+      - description: Data Pengguna Baru
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreateUserInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.UserResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Create User (Admin Only)
+      tags:
+      - Users
+  /users/{id}:
+    delete:
+      description: Menonaktifkan akun pengguna
+      parameters:
+      - description: User ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Deactivate User (Admin Only)
+      tags:
+      - Users
+    get:
+      description: Mendapatkan detail informasi data pengguna berdasarkan ID
+      parameters:
+      - description: User ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.UserResponse'
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get User Detail (Admin Only)
+      tags:
+      - Users
+    put:
+      consumes:
+      - application/json
+      description: Memperbarui data profil atau status pengguna
+      parameters:
+      - description: User ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Data Pembaruan Pengguna
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.UpdateUserInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.UserResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Update User (Admin Only)
+      tags:
+      - Users
+  /vaccinations:
+    get:
+      description: Mendapatkan riwayat daftar vaksinasi hewan peliharaan
+      parameters:
+      - description: Filter berdasarkan Pet ID (UUID)
+        in: query
+        name: pet_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Vaccination'
+                  type: array
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: List Vaccinations
+      tags:
+      - Vaccinations
+    post:
+      consumes:
+      - application/json
+      description: Mencatat data pemberian vaksin hewan peliharaan
+      parameters:
+      - description: Data Vaksinasi
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreateVaccinationInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Vaccination'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Record Vaccination (Veterinarian Only)
+      tags:
+      - Vaccinations
+  /vaccinations/{id}:
+    delete:
+      description: Menghapus catatan riwayat vaksinasi
+      parameters:
+      - description: Vaccination ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete Vaccination (Veterinarian & Admin)
+      tags:
+      - Vaccinations
+    get:
+      description: Mendapatkan detail sertifikat/catatan vaksinasi berdasarkan ID
+      parameters:
+      - description: Vaccination ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Vaccination'
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get Vaccination Detail
+      tags:
+      - Vaccinations
+    put:
+      consumes:
+      - application/json
+      description: Memperbarui data vaksinasi hewan
+      parameters:
+      - description: Vaccination ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Data Pembaruan Vaksinasi
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.UpdateVaccinationInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Vaccination'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Update Vaccination (Veterinarian & Admin)
+      tags:
+      - Vaccinations
+  /veterinarians:
+    get:
+      description: Mendapatkan daftar seluruh dokter hewan aktif dengan opsi filter
+        klinik
+      parameters:
+      - description: Filter berdasarkan Clinic ID (UUID)
+        in: query
+        name: clinic_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.UserResponse'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      summary: List Veterinarians
+      tags:
+      - Veterinarians
+  /veterinarians/{id}:
+    get:
+      description: Mendapatkan detail informasi dokter hewan berdasarkan ID
+      parameters:
+      - description: Veterinarian ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.APIResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.UserResponse'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.APIResponse'
+      summary: Get Veterinarian Detail
+      tags:
+      - Veterinarians
+securityDefinitions:
+  BearerAuth:
+    description: Masukkan token JWT dengan format "Bearer {token}"
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

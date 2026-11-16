@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/AanFLenrir/campuscare-backend/config"
+	"github.com/AanFLenrir/PetrivaBackend/config"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 

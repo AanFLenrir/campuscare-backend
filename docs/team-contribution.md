@@ -1,34 +1,41 @@
-# Kontribusi Anggota — CAMPUSCARE Backend
+# PETRIVA — Laporan Kontribusi Anggota Kelompok
 
-## Identitas Kelompok
+## 1. Identitas Kelompok
+- **Nama Tim:** Kelompok 2 — PETRIVA
+- **Program Studi:** D4 Teknik Informatika
+- **Fakultas:** Fakultas Vokasi
+- **Perguruan Tinggi:** Universitas Airlangga
+- **Mata Kuliah:** Praktikum Pemrograman Backend / Arsitektur Perangkat Lunak
 
-| No | Nama | NIM | GitHub | Peran |
-|---|---|---|---|---|
-| 1 | MOHAMMAD ANHAZ ABDILAH | 434241102 | AanFLenrir | Developer & Git Master |
-| 2 | OKTA ROMAN SANJAYA | 434241108 | decul558-cell | Backend Developer (Routing & Authentication) |
-| 3 | DANU ADJI FERIANTO | 434241111 | Dafiannn | QA & Backend Testing Engineer (Unit Testing, Middleware & Helper Testing) |
+---
 
-## Pembagian Tugas
+## 2. Susunan Anggota Tim
 
-| Tugas | Penanggung Jawab |
-|---|---|
-| Setup project & boilerplate | MOHAMMAD ANHAZ ABDILAH |
-| Model & Migration | MOHAMMAD ANHAZ ABDILAH |
-| Repository layer | MOHAMMAD ANHAZ ABDILAH |
-| Service layer (clean architecture) | MOHAMMAD ANHAZ ABDILAH |
-| Route & HTTP callbacks | OKTA ROMAN SANJAYA |
-| Middleware JWT & Authorization | OKTA ROMAN SANJAYA |
-| Unit Testing (Complaint Service) | MOHAMMAD ANHAZ ABDILAH |
-| Unit Testing (Auth & User Service) | DANU ADJI FERIANTO |
-| Middleware Testing (JWT & Authorization) | DANU ADJI FERIANTO |
-| Helper Testing (JWT & Password Bcrypt) | DANU ADJI FERIANTO |
-| Dokumentasi & Laporan Pengujian Sistem | DANU ADJI FERIANTO |
-| Role-Based Authorization | OKTA ROMAN SANJAYA |
-| Authentication Routes | OKTA ROMAN SANJAYA |
-| User Management Routes | OKTA ROMAN SANJAYA |
+| No | Nama Lengkap | NIM | Peran Utama |
+|---|---|---|---|
+| 1 | **MOHAMMAD ANHAZ ABDILAH** | **434241102** | Git Master, Software Architect, Core Backend Engineer |
+| 2 | **OKTA ROMAN SANJAYA** | **434241108** | Database Engineer, Service & Repository Developer |
+| 3 | **DANU ADJI FERYANTO** | **434241111** | QA Engineer, Middleware, Testing & Swagger UI Documentation |
 
-## Catatan
+---
 
-- Setiap anggota melakukan commit menggunakan akun GitHub masing-masing.
-- Commit hanya untuk pekerjaan yang benar-benar dikerjakan oleh akun tersebut.
-- Git Master (MOHAMMAD ANHAZ ABDILAH) bertanggung jawab atas merging ke `main`.
+## 3. Rincian Kontribusi Anggota
+
+### 3.1. Mohammad Anhaz Abdilah (NIM: 434241102) — Git Master & Lead Architect
+- Merancang arsitektur Clean Architecture tanpa menggunakan controller atau handler.
+- Menyiapkan boilerplate sistem, Fiber v2 setup, serta konfigurasi environment dan graceful shutdown pada `main.go`.
+- Mengimplementasikan alur otentikasi JWT, hashing bcrypt, serta adapter route HTTP pada `route/route.go`.
+- Mengintegrasikan Swagger UI ke dalam backend Go Fiber v2.
+- Mengelola Git repository, branching strategy, dan code review integrasi branch.
+
+### 3.2. Okta Roman Sanjaya (NIM: 434241108) — Database & Domain Engineer
+- Merancang Entity Relationship Diagram (ERD) dan skema database PostgreSQL untuk seluruh entitas PETRIVA.
+- Menyusun DDL migration files (up/down) dari tabel 000001 hingga 000009 lengkap dengan foreign keys dan indexes.
+- Mengimplementasikan layer data access (PostgreSQL repositories) menggunakan `pgxpool.Pool` dan parameterized queries.
+- Membangun business logic pada `pet_service.go`, `clinic_service.go`, dan `service_service.go`.
+
+### 3.3. Danu Adji Feryanto (NIM: 434241111) — QA & Documentation Engineer
+- Mengimplementasikan middleware otentikasi JWT (`authentication.go`) dan otorisasi berbasis peran (`authorization.go`).
+- Mengembangkan logika bisnis reservasi konsultasi (`appointment_service.go`), rekam medis (`medical_record_service.go`), dan vaksinasi (`vaccination_service.go`).
+- Menyusun suite unit test komprehensif menggunakan mock repository untuk seluruh service, helper, dan middleware.
+- Menyusun dokumentasi spesifikasi REST API, ERD, dan panduan instalasi lokal.

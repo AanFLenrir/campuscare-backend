@@ -1,58 +1,39 @@
-## Functional Requirements
+# PETRIVA — Functional Requirements
 
-### Authentication
-- **Registrasi**: Mahasiswa dapat mendaftar dengan nama, email, password, nomor mahasiswa, dan nomor telepon. Password disimpan dalam bentuk hash (bcrypt).
-- **Login**: Menghasilkan token JWT yang berisi `user_id` dan `role` dengan waktu kedaluwarsa (1 hari).
-- **Logout**: Token dapat di‑invalidasi pada client (server stateless, tidak ada endpoint khusus).
-- **Pengambilan profil**: Endpoint untuk mendapatkan data profil pengguna yang sedang terautentikasi.
-- **Perubahan profil**: Pengguna dapat memperbarui nama, email, nomor telepon, dan foto profil.
-- **Pengamanan password**: Password harus memenuhi minimal 8 karakter, mengandung huruf besar, huruf kecil, angka, dan simbol.
-- **Autentikasi menggunakan JWT**: Setiap request ke endpoint yang dilindungi harus menyertakan header `Authorization: Bearer <token>`.
+## 1. Modul Autentikasi & Akun
+- **FR-01:** Sistem dapat memproses pendaftaran akun baru untuk role `PET_OWNER`.
+- **FR-02:** Sistem dapat melakukan verifikasi login menggunakan email dan password yang telah di-hash dengan `bcrypt`.
+- **FR-03:** Sistem menerbitkan JSON Web Token (JWT) dengan masa kedaluwarsa yang dapat dikonfigurasi.
+- **FR-04:** Sistem menyediakan endpoint profil pengguna yang sedang login (`/auth/me`).
 
-### User Management (Admin)
-- **Melihat pengguna**: Daftar seluruh pengguna dengan filter role dan status.
-- **Menambahkan pengguna**: Admin dapat menambah pengguna baru (misalnya petugas) tanpa proses registrasi mahasiswa.
-- **Mengubah data pengguna**: Update nama, email, role, status aktif/non‑aktif.
-- **Menghapus atau menonaktifkan pengguna**: Soft delete dengan flag `is_active`.
-- **Pengelolaan role**: Assign role (admin, mahasiswa, petugas) ke pengguna.
+## 2. Modul Master Data (Klinik & Layanan)
+- **FR-05:** Admin dapat membuat, membaca, memperbarui, dan menonaktifkan data klinik.
+- **FR-06:** Admin dapat mengelola katalog layanan (nama, deskripsi, durasi menit, tarif) untuk setiap klinik.
+- **FR-07:** Pengguna umum (publik) dapat melihat daftar klinik dan layanan yang sedang aktif.
 
-### Complaint Management
-- **Membuat pengaduan** (Mahasiswa): Mengirim judul, deskripsi, kategori, fasilitas, prioritas, dan optional foto.
-- **Melihat pengaduan**: Semua pengguna dapat melihat daftar pengaduan; mahasiswa hanya melihat miliknya, petugas melihat yang ditugaskan, admin melihat semua.
-- **Mengubah pengaduan**: Mahasiswa dapat mengubah pengaduan miliknya selama status belum `ASSIGNED`.
-- **Menghapus pengaduan**: Mahasiswa dapat meng‑delete (soft) pengaduan sebelum diverifikasi.
-- **Melihat detail pengaduan**: Menampilkan semua informasi termasuk gambar.
-- **Mengunggah gambar pendukung**: Menyimpan file gambar pada server (path) dan menyimpan referensi di tabel `complaint_images`.
-- **Melihat riwayat pengaduan**: Daftar perubahan status dan catatan.
+## 3. Modul Hewan Peliharaan (Pets)
+- **FR-08:** Pemilik hewan dapat menambahkan hewan peliharaan miliknya dengan validasi spesies (`CAT`, `DOG`, `BIRD`, `RABBIT`, `OTHER`) dan gender (`MALE`, `FEMALE`, `UNKNOWN`).
+- **FR-09:** Pemilik hewan hanya dapat melihat, mengubah, dan menonaktifkan hewan peliharaannya sendiri.
+- **FR-10:** Sistem menerapkan *soft delete* pada data hewan untuk menjaga integritas riwayat rekam medis dan vaksinasi.
 
-### Category Management (Admin)
-- **Menambahkan kategori**
-- **Melihat kategori**
-- **Mengubah kategori**
-- **Menghapus atau menonaktifkan kategori**
+## 4. Modul Reservasi Janji Temu (Appointments)
+- **FR-11:** Pemilik hewan dapat membuat janji temu baru dengan memilih hewan, dokter hewan, klinik, layanan, dan waktu appointment.
+- **FR-12:** Sistem memvalidasi bahwa waktu appointment berada di masa mendatang dan dokter tidak memiliki jadwal bentrok.
+- **FR-13:** Sistem memvalidasi bahwa dokter dan layanan terdaftar pada klinik yang dipilih.
+- **FR-14:** Sistem mengelola transisi status janji temu: `PENDING` → `CONFIRMED` → `IN_PROGRESS` → `COMPLETED` / `CANCELLED` / `REJECTED`.
+- **FR-15:** Pemilik dapat membatalkan janji temu miliknya yang masih berstatus `PENDING` atau `CONFIRMED` dengan menyertakan alasan pembatalan.
 
-### Facility Management (Admin)
-- **Menambahkan fasilitas** (nama, lokasi, deskripsi, kondisi)
-- **Melihat fasilitas**
-- **Mengubah fasilitas**
-- **Menghapus atau menonaktifkan fasilitas**
+## 5. Modul Rekam Medis (Medical Records)
+- **FR-16:** Dokter hewan yang ditugaskan dapat membuat rekam medis untuk janji temu yang ditanganinya.
+- **FR-17:** Rekam medis mencakup diagnosis (wajib), gejala, tindakan medis, dan resep obat.
+- **FR-18:** Pembuatan rekam medis otomatis mengubah status janji temu menjadi `COMPLETED`.
+- **FR-19:** Sistem mencegah duplikasi pembuatan rekam medis untuk janji temu yang sama.
+- **FR-20:** Pemilik hewan dapat membaca seluruh riwayat rekam medis hewan peliharaannya.
 
-### Assignment Management (Admin)
-- **Menugaskan petugas** ke suatu pengaduan.
-- **Petugas melihat tugas** yang ditugaskan kepadanya.
-- **Admin melihat daftar penugasan** seluruhnya.
-- **Mencatat waktu penugasan**.
+## 6. Modul Buku Vaksinasi Digital (Vaccinations)
+- **FR-21:** Dokter hewan dapat mencatat riwayat vaksinasi hewan meliputi nama vaksin, tanggal vaksinasi, tanggal vaksin berikutnya, nomor batch, dan catatan medis.
+- **FR-22:** Pemilik hewan dapat melihat riwayat vaksinasi hewannya.
 
-### Complaint Tracking
-- **Mahasiswa melihat status pengaduan** (REAL‑TIME melalui endpoint).
-- **Petugas memperbarui status** (`IN_PROGRESS`, `RESOLVED`, dll.).
-- **Sistem mencatat setiap perubahan status** ke tabel `complaint_histories`.
-- **Mahasiswa dapat melihat riwayat penanganan**.
-
-### Report Management (Admin)
-- **Melihat jumlah pengaduan** keseluruhan.
-- **Melihat pengaduan berdasarkan status**.
-- **Melihat pengaduan berdasarkan kategori**.
-- **Melihat laporan penyelesaian** (jumlah selesai per periode).
-
-### Non‑Functional Requirements (see separate document)
+## 7. Modul Dashboard & Dokumentasi
+- **FR-23:** Sistem menyediakan ringkasan metrik statistik real-time sesuai role yang mengakses.
+- **FR-24:** Sistem menyediakan dokumentasi API interaktif berbasis Swagger UI di endpoint `/swagger/`.

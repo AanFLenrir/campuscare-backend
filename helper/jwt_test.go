@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/AanFLenrir/campuscare-backend/config"
-	"github.com/AanFLenrir/campuscare-backend/helper"
+	"github.com/AanFLenrir/PetrivaBackend/config"
+	"github.com/AanFLenrir/PetrivaBackend/helper"
 	"github.com/golang-jwt/jwt/v5"
 )
 

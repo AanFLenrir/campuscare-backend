@@ -6,9 +6,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/AanFLenrir/campuscare-backend/config"
-	"github.com/AanFLenrir/campuscare-backend/helper"
-	"github.com/AanFLenrir/campuscare-backend/middleware"
+	"github.com/AanFLenrir/PetrivaBackend/config"
+	"github.com/AanFLenrir/PetrivaBackend/helper"
+	"github.com/AanFLenrir/PetrivaBackend/middleware"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -32,8 +32,8 @@ func setupTestApp(cfg *config.Config) *fiber.App {
 	})
 
 	// Multiple allowed roles route
-	app.Get("/staff-only", middleware.AuthMiddleware(cfg), middleware.Authorize("ADMIN", "PETUGAS"), func(c *fiber.Ctx) error {
-		return c.JSON(fiber.Map{"message": "welcome staff"})
+	app.Get("/staff-only", middleware.AuthMiddleware(cfg), middleware.Authorize("ADMIN", "VETERINARIAN"), func(c *fiber.Ctx) error {
+		return c.JSON(fiber.Map{"message": "welcome clinic staff"})
 	})
 
 	return app
@@ -93,7 +93,7 @@ func TestAuthMiddleware_Success(t *testing.T) {
 	cfg := &config.Config{JWTSecret: "test-secret", JWTExpireHour: 1}
 	app := setupTestApp(cfg)
 
-	token, err := helper.GenerateToken(cfg, "usr-123", "MAHASISWA")
+	token, err := helper.GenerateToken(cfg, "usr-123", "PET_OWNER")
 	if err != nil {
 		t.Fatalf("failed to generate token: %v", err)
 	}
@@ -138,8 +138,8 @@ func TestAuthorize_ForbiddenRole(t *testing.T) {
 	cfg := &config.Config{JWTSecret: "test-secret", JWTExpireHour: 1}
 	app := setupTestApp(cfg)
 
-	// Mahasiswa trying to access /admin-only
-	token, err := helper.GenerateToken(cfg, "mhs-1", "MAHASISWA")
+	// PET_OWNER trying to access /admin-only
+	token, err := helper.GenerateToken(cfg, "owner-1", "PET_OWNER")
 	if err != nil {
 		t.Fatalf("failed to generate token: %v", err)
 	}
@@ -161,10 +161,10 @@ func TestAuthorize_MultipleAllowedRoles(t *testing.T) {
 	cfg := &config.Config{JWTSecret: "test-secret", JWTExpireHour: 1}
 	app := setupTestApp(cfg)
 
-	// Petugas accessing /staff-only (allowed: ADMIN, PETUGAS)
-	tokenPetugas, _ := helper.GenerateToken(cfg, "petugas-1", "PETUGAS")
+	// Veterinarian accessing /staff-only (allowed: ADMIN, VETERINARIAN)
+	tokenVet, _ := helper.GenerateToken(cfg, "vet-1", "VETERINARIAN")
 	req := httptest.NewRequest(http.MethodGet, "/staff-only", nil)
-	req.Header.Set("Authorization", "Bearer "+tokenPetugas)
+	req.Header.Set("Authorization", "Bearer "+tokenVet)
 	resp, err := app.Test(req, -1)
 	if err != nil {
 		t.Fatalf("failed: %v", err)
@@ -174,10 +174,10 @@ func TestAuthorize_MultipleAllowedRoles(t *testing.T) {
 		t.Errorf("expected status %d, got %d", fiber.StatusOK, resp.StatusCode)
 	}
 
-	// Mahasiswa accessing /staff-only (forbidden)
-	tokenMhs, _ := helper.GenerateToken(cfg, "mhs-1", "MAHASISWA")
+	// PET_OWNER accessing /staff-only (forbidden)
+	tokenOwner, _ := helper.GenerateToken(cfg, "owner-1", "PET_OWNER")
 	req2 := httptest.NewRequest(http.MethodGet, "/staff-only", nil)
-	req2.Header.Set("Authorization", "Bearer "+tokenMhs)
+	req2.Header.Set("Authorization", "Bearer "+tokenOwner)
 	resp2, err := app.Test(req2, -1)
 	if err != nil {
 		t.Fatalf("failed: %v", err)

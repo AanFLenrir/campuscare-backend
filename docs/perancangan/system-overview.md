@@ -1,50 +1,46 @@
-# System Overview
+# PETRIVA — System Overview
 
-**Nama Sistem**: CAMPUSCARE (Campus Care – Campus Facility Complaint and Management System)
-
-**Latar Belakang**
-
-Fasilitas kampus seperti gedung, laboratorium, ruang kelas, dan area umum sering mengalami kerusakan atau masalah yang memerlukan penanganan cepat. Proses pelaporan secara manual (melalui kertas atau email) tidak efisien, mengakibatkan keterlambatan penanganan, kurangnya transparansi, dan kesulitan dalam memantau status pengaduan.
-
-**Deskripsi Sistem**
-
-CAMPUSCARE adalah sistem informasi berbasis REST API yang memungkinkan mahasiswa melaporkan kerusakan atau kebutuhan perbaikan fasilitas kampus, petugas menindaklanjuti pengaduan, dan admin mengelola seluruh proses. Sistem ini mencatat setiap langkah penanganan, menyediakan riwayat lengkap, serta menampilkan status secara real‑time.
-
-**Permasalahan yang Diselesaikan**
-1. Pelaporan pengaduan yang masih dilakukan secara manual.
-2. Mahasiswa tidak dapat mengetahui perkembangan pengaduan mereka.
-3. Petugas kekurangan alat pencatatan pekerjaan yang terstruktur.
-4. Admin kesulitan memantau seluruh pengaduan secara menyeluruh.
-5. Riwayat penanganan belum terdokumentasi dengan baik.
-
-**Tujuan Sistem**
-1. Mempermudah mahasiswa melaporkan kerusakan fasilitas.
-2. Mempermudah petugas dalam menangani dan melacak pengaduan.
-3. Mempermudah admin mengelola, memonitor, dan melaporkan statistik pengaduan.
-4. Menyediakan informasi status pengaduan yang transparan.
-5. Menyediakan riwayat penanganan yang dapat ditelusuri.
-
-**Manfaat**
-- Peningkatan efisiensi penanganan fasilitas.
-- Transparansi proses bagi semua pemangku kepentingan.
-- Dokumentasi lengkap untuk audit dan perbaikan berkelanjutan.
-
-**Ruang Lingkup**
-- Modul **Auth**: Registrasi, login, manajemen profil.
-- Modul **User Management**: CRUD pengguna, manajemen peran.
-- Modul **Facility & Category Management**: Pengelolaan data fasilitas dan kategori pengaduan.
-- Modul **Complaint Management**: Pembuatan, pembaruan, penugasan, dan pelacakan pengaduan.
-- Modul **Reporting**: Statistik dan laporan pengaduan untuk admin.
-
-**Teknologi yang Digunakan**
-- Bahasa pemrograman: **Go 1.26**
-- Framework HTTP: **Fiber**
-- Database: **PostgreSQL** dengan driver **pgx**
-- Authentication: **JWT**
-- Password hashing: **bcrypt**
-- Migration: **golang-migrate**
-- Versi kontrol: **Git** pada **GitHub**
+## 1. Identitas Sistem
+- **Nama Sistem:** PETRIVA
+- **Kepanjangan:** Pet Care Management System
+- **Jenis Aplikasi:** Backend RESTful Web Service
+- **Platform:** Go (Fiber v2) + PostgreSQL (pgx v5)
+- **Lisensi:** Open-Source Educational Project
 
 ---
 
-*Dokumen ini disusun dalam bahasa Indonesia formal dan mudah dipahami.*
+## 2. Latar Belakang & Masalah
+Pemilik hewan peliharaan (*pet owner*) seringkali mengalami kesulitan dalam:
+1. Memantau riwayat kesehatan, vaksinasi, dan rekam medis hewan peliharaan mereka secara terorganisir.
+2. Melakukan penjadwalan pemeriksaan (*appointment*) ke klinik hewan tanpa kepastian waktu dan dokter penanggung jawab.
+3. Terjadinya jadwal bentrok (*conflict schedule*) pada dokter hewan yang sama saat penanganan pasien hewan.
+4. Hilangnya buku vaksinasi fisik konvensional yang menyulitkan dokter memeriksa riwayat imunisasi hewan.
+
+Klinik dan dokter hewan juga memerlukan sistem pencatatan rekam medis digital yang terstruktur, aman, dan mudah diakses untuk memberikan diagnosa dan pengobatan yang berkesinambungan.
+
+---
+
+## 3. Tujuan Sistem
+1. Menyediakan REST API yang andal untuk manajemen data profil hewan, reservasi konsultasi, rekam medis, dan vaksinasi.
+2. Mencegah terjadinya konflik jadwal dokter hewan melalui validasi jadwal otomatis.
+3. Menjamin keamanan data rekam medis dengan pembatasan hak akses (*ownership & role-based access control*).
+4. Menyediakan dokumentasi API interaktif menggunakan Swagger UI untuk memudahkan integrasi client/frontend.
+
+---
+
+## 4. Ruang Lingkup & Batasan Sistem
+### Yang Dicakup:
+- Autentikasi JWT dan otorisasi tiga role: `ADMIN`, `PET_OWNER`, dan `VETERINARIAN`.
+- Manajemen klinik dan katalog layanan medis/perawatan.
+- Pengelolaan profil hewan peliharaan (spesies, ras, jenis kelamin, berat, tanggal lahir).
+- Pembuatan dan pengelolaan status janji temu (appointment) dengan pencegahan jadwal bentrok.
+- Pencatatan rekam medis digital (diagnosis, gejala, tindakan, dan resep).
+- Pencatatan buku vaksinasi digital beserta tanggal vaksin berikutnya.
+- Dashboard statistik ringkasan per role.
+
+### Batasan Sistem (*Out of Scope*):
+- Tidak mencakup marketplace jual-beli hewan.
+- Tidak menyediakan e-commerce pakan atau aksesoris hewan.
+- Tidak mengintegrasikan gateway pembayaran online.
+- Tidak menggunakan kecerdasan buatan (AI) untuk diagnosis otomatis.
+- Tidak terhubung dengan perangkat IoT medis.

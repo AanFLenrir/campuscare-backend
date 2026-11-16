@@ -1,63 +1,43 @@
-# Git Workflow — CAMPUSCARE Backend
+# PETRIVA — Git Workflow & Version Control Standard
 
-## Struktur Branch
+## 1. Alur Kerja Git (Git Feature Branch Workflow)
+Proyek PETRIVA menggunakan alur kerja berbasis *feature branch* terpadu dengan peran **Git Master** sebagai penanggung jawab integrasi ke branch utama (`main`):
 
 ```
-main          ← branch utama (production-ready)
-feature/*     ← pengembangan fitur baru
-fix/*         ← perbaikan bug
+       [feat/auth-jwt] ───────────────┐
+                                      ▼
+[main] ───────────────────────────> [main] (Release / Stable)
+                                      ▲
+       [feat/pet-appointment] ────────┘
 ```
 
-## Peran Git Master
+---
 
-Git Master bertugas:
-- Mereview Pull Request dari anggota.
-- Melakukan merge ke branch `main`.
-- Memastikan `main` selalu dalam kondisi buildable.
+## 2. Aturan Branching & Penamaan
 
-## Panduan Micro Commits
+- `main`: Branch produksi yang selalu dalam kondisi stabil, dapat dikompilasi (`go build`), dan seluruh pengujian lulus (`go test`).
+- `feat/<nama-fitur>`: Branch untuk penambahan fitur baru (contoh: `feat/appointment-service`, `feat/swagger-ui`).
+- `fix/<nama-bug>`: Branch untuk perbaikan issue atau bug (contoh: `fix/conflict-check`, `fix/env-parser`).
+- `docs/<nama-dokumen>`: Branch khusus pembaruan dokumentasi atau panduan setup.
 
-Setiap commit harus kecil, fokus, dan deskriptif:
+---
 
-```bash
-git add app/model/complaint.go
-git commit -m "feat(model): add Complaint entity with status and priority fields"
+## 3. Standar Pesan Commit (Conventional Commits)
 
-git add app/repository/complaint_repository.go
-git commit -m "feat(repo): implement ComplaintRepository with CRUD operations"
+Format commit:
+`<tipe>(<lingkup opsional>): <deskripsi singkat imperative>`
 
-git add app/service/complaint_service.go
-git commit -m "feat(service): implement ComplaintService pure business logic"
+Contoh tipe yang digunakan:
+- `feat`: Penambahan fitur baru (`feat: implement pet management and ownership validation`)
+- `fix`: Perbaikan bug (`fix: resolve scheduling conflict in appointment service`)
+- `test`: Penambahan atau pembaruan pengujian (`test: add comprehensive mock tests for medical record service`)
+- `docs`: Pembaruan dokumentasi (`docs: add Swagger UI guide and ERD diagram`)
+- `refactor`: Perubahan struktur kode tanpa mengubah fungsionalitas (`refactor: align service layer with clean architecture`)
+- `chore`: Pemeliharaan dependensi atau konfigurasi (`chore: add swagger dependencies to go.mod`)
 
-git add route/route.go
-git commit -m "feat(route): wire complaint endpoints to service layer"
-```
+---
 
-## Konvensi Pesan Commit
-
-Format: `<type>(<scope>): <deskripsi>`
-
-| Type | Keterangan |
-|---|---|
-| `feat` | Fitur baru |
-| `fix` | Perbaikan bug |
-| `refactor` | Refactoring tanpa perubahan fungsional |
-| `docs` | Perubahan dokumentasi |
-| `test` | Penambahan atau perbaikan test |
-| `chore` | Perubahan konfigurasi, dependency, dsb |
-
-## Larangan
-
-- ❌ Jangan gunakan `git push --force` ke `main`.
-- ❌ Jangan commit credential atau file `.env`.
-- ❌ Jangan commit atas nama anggota lain.
-- ❌ Jangan manipulasi tanggal commit.
-
-## Push ke Remote
-
-```bash
-git push origin main
-```
-
-Pastikan seluruh pemeriksaan (`go build`, `go vet`, `go test`) berhasil sebelum push.
-
+## 4. Peran Git Master
+1. Memastikan tidak ada *force push* ke branch `main`.
+2. Menjaga riwayat commit bersih dan informatif (*micro commits*).
+3. Melakukan verifikasi build (`go build ./...`) dan pengujian (`go test ./...`) sebelum melakukan merge ke branch `main`.
